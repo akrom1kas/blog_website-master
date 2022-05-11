@@ -3,15 +3,14 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 from tinymce.models import HTMLField
-from django.contrib.auth.models import User
-# from PIL import Image
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = HTMLField('description', null=True)
     title = models.CharField(max_length=100)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
-    text = HTMLField('Text', null=True)
+    # description = HTMLField('description', null=True)
 
 
     def publish(self):
@@ -32,7 +31,7 @@ class Photo(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
-    text = models.TextField()
+    text = HTMLField('description', null=True)
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_comment',

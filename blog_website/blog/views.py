@@ -89,11 +89,6 @@ def comment_remove(request, pk):
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
 
-@login_required
-def comment_edit(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.edit()
-    return redirect('post_detail', pk=comment.post.pk)
 
 @csrf_protect
 def register(request):
