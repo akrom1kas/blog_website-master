@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,11 +27,6 @@ SECRET_KEY = 'django-insecure-0w)1a_8cv$of(s0n!&n*xlc%ucj-(5phn7a!pwzs-pazs^(de2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-# media folder settings
-
-# print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
-
-# Application definition
 
 INSTALLED_APPS = [
     'blog',
@@ -157,3 +153,12 @@ TINYMCE_DEFAULT_CONFIG = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'blog/media')
 
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mindaugas.andriusaitis@gmail.com'
+# el. pašto adresas iš kurio siųsite
+EMAIL_HOST_PASSWORD = 'VerySecret'
+# slaptažodis
