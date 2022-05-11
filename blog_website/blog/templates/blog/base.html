@@ -10,14 +10,15 @@
     <body>
         <div class="page-header">
             {% if user.is_authenticated %}
-                <a href="{% url 'post_new' %}" class="top-menu"><span class="btn btn-primary">Add Post</span></a>
-                  <p class="top-menu">{{ user.username }}&nbsp;<a href="{% url 'logout' %}" class="top-menu"><span class="btn btn-primary">Log out</span></a></p>
-
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="btn btn-primary">Add Post</span></a>
+            <a href="{% url 'logout' %}" class="top-menu"><span class="btn btn-primary">Log out</span></a></p>
+            <p class="top-menu">{{ user.username }}
                 {% else %}
             {% if not user.is_authenticated %}
-{% endif %}
+            {% endif %}
             <a href="{% url 'register'%}" class="top-menu"><span class="btn btn-primary">Sign up</span></a>
             <a href="{% url 'login' %}" class="top-menu"><span class="btn btn-primary">Login</span></a>
+            <a href="/" class="top-menu"><span class="btn btn-primary">Home</span></a>
             {% endif %}
             <h1><a href="/"><span class="glyphicon glyphicon-film"></span> My Movie Blog</a></h1>
         </div>
