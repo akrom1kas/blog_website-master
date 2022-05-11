@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post, Comment
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.models import User
 
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
@@ -95,24 +96,20 @@ def comment_remove(request, pk):
 @csrf_protect
 def register(request):
     if request.method == "POST":
-        # pasiimame reikšmes iš registracijos formos
         username = request.POST['username']
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
-        # tikriname, ar sutampa slaptažodžiai
         if password == password2:
-            # tikriname, ar neužimtas username
             if User.objects.filter(username=username).exists():
                 messages.error(request, f'Vartotojo vardas {username} užimtas!')
                 return redirect('register')
             else:
-                # tikriname, ar nėra tokio pat email
+
                 if User.objects.filter(email=email).exists():
                     messages.error(request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
                     return redirect('register')
                 else:
-                    # jeigu viskas tvarkoje, sukuriame naują vartotoją
                     User.objects.create_user(username=username, email=email, password=password)
         else:
             messages.error(request, 'Slaptažodžiai nesutampa!')
