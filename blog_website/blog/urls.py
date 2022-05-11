@@ -1,6 +1,8 @@
 from django.urls import path, include
 from . import views
 from .models import Post
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
@@ -16,4 +18,5 @@ urlpatterns = [
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
     path('tinymce/', include('tinymce.urls')),
     path('register/', views.register, name='register')
-]
+] + (static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

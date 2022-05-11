@@ -27,9 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 # media folder settings
-MEDIA_ROOT = os.path.join(BASE_DIR, 'blog/media')
 
-MEDIA_URL = '/media/'
 # print(MEDIA_ROOT) - nevenkite padebuginti, bus lengviau nepasiklysti django filesystem džiunglėse
 
 # Application definition
@@ -155,3 +153,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar': True,
     'statusbar': True,
     }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'blog/media')
+
+MEDIA_URL = '/media/'
